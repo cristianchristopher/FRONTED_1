@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Grid, Card, CardContent, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 import api from "../api/axios";
-
 
 export default function DashboardHomePage() {
   const [stats, setStats] = useState({
@@ -15,14 +17,10 @@ export default function DashboardHomePage() {
       try {
         const personalRes = await api.get("/api/v1/personal");
 
-        // Estos endpoints aún no existen — evita error
-        const clientesRes = { data: { data: [] } };
-        const imagenesRes = { data: { data: [] } };
-
         setStats({
           personal: personalRes.data.data.length,
-          clientes: clientesRes.data.data.length,
-          imagenes: imagenesRes.data.data.length,
+          clientes: 0,   // aún no creados
+          imagenes: 0,   // aún no creados
         });
       } catch (err) {
         console.error("Error obteniendo estadísticas:", err);
@@ -39,10 +37,9 @@ export default function DashboardHomePage() {
       </Typography>
 
       <Grid container spacing={3}>
-
-        {/* CARD PERSONAL */}
+        
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ bgcolor: "#1976d2", color: "white" }}>
+          <Card sx={{ backgroundColor: "#1976d2", color: "white" }}>
             <CardContent>
               <Typography variant="h5">Personal</Typography>
               <Typography variant="h3" fontWeight="bold">
@@ -52,9 +49,8 @@ export default function DashboardHomePage() {
           </Card>
         </Grid>
 
-        {/* CARD CLIENTES */}
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ bgcolor: "#2e7d32", color: "white" }}>
+          <Card sx={{ backgroundColor: "#2e7d32", color: "white" }}>
             <CardContent>
               <Typography variant="h5">Clientes</Typography>
               <Typography variant="h3" fontWeight="bold">
@@ -64,9 +60,8 @@ export default function DashboardHomePage() {
           </Card>
         </Grid>
 
-        {/* CARD IMÁGENES */}
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ bgcolor: "#ed6c02", color: "white" }}>
+          <Card sx={{ backgroundColor: "#ed6c02", color: "white" }}>
             <CardContent>
               <Typography variant="h5">Imágenes</Typography>
               <Typography variant="h3" fontWeight="bold">
