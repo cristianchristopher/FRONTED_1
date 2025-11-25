@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Grid, Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import api from "../api/axios";
 
 export default function DashboardHomePage() {
@@ -14,7 +14,6 @@ export default function DashboardHomePage() {
       try {
         const personalRes = await api.get("/api/v1/personal");
 
-        // Endpoints ficticios para evitar errores si no existen
         const clientesRes = { data: { data: [] } };
         const imagenesRes = { data: { data: [] } };
 
@@ -32,51 +31,49 @@ export default function DashboardHomePage() {
   }, []);
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <Typography variant="h4" gutterBottom>
         Bienvenido al Panel de Administración
       </Typography>
 
-      {/* GRID PRINCIPAL */}
-      <Grid container spacing={3}>
-
+      {/* CONTENEDOR SIN GRID */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "20px",
+        }}
+      >
         {/* CARD PERSONAL */}
-        <Grid xs={12} sm={6} md={4}>
-          <Card sx={{ bgcolor: "#1976d2", color: "white" }}>
-            <CardContent>
-              <Typography variant="h5">Personal</Typography>
-              <Typography variant="h3" fontWeight="bold">
-                {stats.personal}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        <Card style={{ backgroundColor: "#1976d2", color: "white", width: "300px" }}>
+          <CardContent>
+            <Typography variant="h5">Personal</Typography>
+            <Typography variant="h3" style={{ fontWeight: "bold" }}>
+              {stats.personal}
+            </Typography>
+          </CardContent>
+        </Card>
 
         {/* CARD CLIENTES */}
-        <Grid xs={12} sm={6} md={4}>
-          <Card sx={{ bgcolor: "#2e7d32", color: "white" }}>
-            <CardContent>
-              <Typography variant="h5">Clientes</Typography>
-              <Typography variant="h3" fontWeight="bold">
-                {stats.clientes}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        <Card style={{ backgroundColor: "#2e7d32", color: "white", width: "300px" }}>
+          <CardContent>
+            <Typography variant="h5">Clientes</Typography>
+            <Typography variant="h3" style={{ fontWeight: "bold" }}>
+              {stats.clientes}
+            </Typography>
+          </CardContent>
+        </Card>
 
         {/* CARD IMÁGENES */}
-        <Grid xs={12} sm={6} md={4}>
-          <Card sx={{ bgcolor: "#ed6c02", color: "white" }}>
-            <CardContent>
-              <Typography variant="h5">Imágenes</Typography>
-              <Typography variant="h3" fontWeight="bold">
-                {stats.imagenes}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-      </Grid>
+        <Card style={{ backgroundColor: "#ed6c02", color: "white", width: "300px" }}>
+          <CardContent>
+            <Typography variant="h5">Imágenes</Typography>
+            <Typography variant="h3" style={{ fontWeight: "bold" }}>
+              {stats.imagenes}
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
