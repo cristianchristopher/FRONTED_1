@@ -20,19 +20,13 @@ export default api;
 /*
 import axios from "axios";
 
-const baseURL = import.meta.env.DEV
-  ? "http://localhost:4000"
-  : "https://back-web-administrador.onrender.com";
-
 const api = axios.create({
-  baseURL,
+  baseURL: "http://localhost:4000",
 });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
